@@ -1,0 +1,51 @@
+.game {
+  width: 600px;
+  height: 600px;
+  position: relative;
+}
+
+.top, .bot, .left, .right, .mid {
+  position: absolute;
+}
+
+.mid {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  opacity: .5;
+}
+
+.top, .bot {
+  width: 400px;
+  height: 200px;
+  left: 85px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bot {
+  justify-content: flex-end;
+  bottom: 15px;
+}
+
+.top {
+  justify-content: flex-start;
+  top: 15px;
+}
+
+.left, .right {
+  height: 400px;
+  width: 200px;
+}
+
+.left {
+  top: 140px;
+  justify-content: flex-end;
+  left: -30px;
+}
+
+.right {
+  top: 220px;
+  right: -30px;
+}

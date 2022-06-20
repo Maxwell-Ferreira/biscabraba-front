@@ -1,0 +1,47 @@
+.leftBar {
+  width: 200px;
+  height: 100%;
+  border-right: 3px solid rgba(0, 0, 0, 0.492);;
+}
+
+.leftBar > h2 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.leftBar .zoom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.leftBar .zoom button{
+  background-color: var(--text-primary);
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  box-shadow: 0 0 10px #000;
+
+  width: 30px;
+  height: 30px;
+
+  margin: 0 5px;
+}
+
+.leftBar .zoom button:hover{
+  background-color: var(--text-seccondary);
+  transition: .2s;
+}
+
+.info {
+  background-color: rgba(0, 0, 0, 0.492);
+  padding: 5px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.turn {
+  background-color: rgba(0, 0, 0, 0.492);
+  padding: 5px;
+  text-align: center;
+  margin: 20px 0;
+}
