@@ -6,7 +6,7 @@ function App() {
   const [Socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io('localhost:4000');
+    const newSocket = io('https://biscabraba.herokuapp.com');
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
