@@ -23,8 +23,16 @@ function Game({ Socket, initialGameData }: GameProps) {
       const audio = playAudio(ohNo);
       audio.addEventListener("ended", () => window.location.reload());
     });
-    Socket.on("card-played", (data: GameData) => setGameData(data));
-    Socket.on("buy-card", (data: GameData) => setGameData(data));
+    Socket.on("game-playerDisconnected", () => {
+      const audio = playAudio(ohNo);
+      audio.addEventListener("ended", () => window.location.reload());
+    });
+
+    const handleGameData = (data: GameData) => setGameData(data);
+    Socket.on("card-played", handleGameData);
+    Socket.on("game-gameData", handleGameData);
+    Socket.on("buy-card", handleGameData);
+    Socket.on("game-buyCard", handleGameData);
   }, [Socket]);
 
   if (!gameData) return null;

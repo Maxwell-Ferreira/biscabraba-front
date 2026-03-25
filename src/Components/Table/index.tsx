@@ -18,8 +18,11 @@ function Table({ Socket, initialGameData }: TableProps) {
   console.log(gameData);
 
   useEffect(() => {
-    Socket.on("card-played", (data: GameData) => setGameData(data));
-    Socket.on("buy-card", (data: GameData) => {
+    const handleGameData = (data: GameData) => setGameData(data);
+    Socket.on("card-played", handleGameData);
+    Socket.on("game-gameData", handleGameData);
+
+    const handleBuyCard = (data: GameData) => {
       const moves = document.querySelectorAll(".actual-move");
       setTimeout(() => {
         moves.forEach((move) => {
@@ -29,7 +32,10 @@ function Table({ Socket, initialGameData }: TableProps) {
           setGameData(data);
         }, 1000);
       }, 4000);
-    });
+    };
+
+    Socket.on("buy-card", handleBuyCard);
+    Socket.on("game-buyCard", handleBuyCard);
   }, [Socket]);
 
   if (!gameData || !gameData.currentPlayer) return null;
