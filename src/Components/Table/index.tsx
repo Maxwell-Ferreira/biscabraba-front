@@ -18,8 +18,8 @@ function Table({ Socket, initialGameData }: TableProps) {
   console.log(gameData);
 
   useEffect(() => {
-    Socket.on("game-gameData", (data: GameData) => setGameData(data));
-    Socket.on("game-buyCard", (data: GameData) => {
+    Socket.on("card-played", (data: GameData) => setGameData(data));
+    Socket.on("buy-card", (data: GameData) => {
       const moves = document.querySelectorAll(".actual-move");
       setTimeout(() => {
         moves.forEach((move) => {
