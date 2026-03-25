@@ -36,6 +36,13 @@ function Table({ Socket, initialGameData }: TableProps) {
 
     Socket.on("buy-card", handleBuyCard);
     Socket.on("game-buyCard", handleBuyCard);
+
+    return () => {
+      Socket.off("card-played", handleGameData);
+      Socket.off("game-gameData", handleGameData);
+      Socket.off("buy-card", handleBuyCard);
+      Socket.off("game-buyCard", handleBuyCard);
+    };
   }, [Socket]);
 
   if (!gameData || !gameData.currentPlayer) return null;

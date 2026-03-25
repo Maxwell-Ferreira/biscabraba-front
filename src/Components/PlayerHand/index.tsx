@@ -13,9 +13,14 @@ interface PlayerHandProps {
 
 function PlayerHand({ Socket, player }: PlayerHandProps) {
   const handleClick = (e: React.MouseEvent<HTMLImageElement>) => {
-    const card = (e.target as HTMLImageElement).id;
-    console.log(card);
-    Socket.emit("playCard", { card_id: parseInt(card) });
+    const cardIdStr = e.currentTarget.id;
+    console.log("Card clicked:", cardIdStr);
+    const cardId = parseInt(cardIdStr, 10);
+    if (!isNaN(cardId)) {
+      Socket.emit("playCard", { card_id: cardId });
+    } else {
+      console.error("Invalid card ID from click event", cardIdStr);
+    }
   };
 
   return (

@@ -19,20 +19,27 @@ function Game({ Socket, initialGameData }: GameProps) {
   const [gameData, setGameData] = useState<GameData | null>(initialGameData);
 
   useEffect(() => {
-    Socket.on("game-player-disconected", () => {
+    const handleDisconnect = () => {
       const audio = playAudio(ohNo);
       audio.addEventListener("ended", () => window.location.reload());
-    });
-    Socket.on("game-playerDisconnected", () => {
-      const audio = playAudio(ohNo);
-      audio.addEventListener("ended", () => window.location.reload());
-    });
+    };
+    Socket.on("game-player-disconected", handleDisconnect);
+    Socket.on("game-playerDisconnected", handleDisconnect);
 
     const handleGameData = (data: GameData) => setGameData(data);
     Socket.on("card-played", handleGameData);
     Socket.on("game-gameData", handleGameData);
     Socket.on("buy-card", handleGameData);
     Socket.on("game-buyCard", handleGameData);
+
+    return () => {
+      Socket.off("game-player-disconected", handleDisconnect);
+      Socket.off("game-playerDisconnected", handleDisconnect);
+      Socket.off("card-played", handleGameData);
+      Socket.off("game-gameData", handleGameData);
+      Socket.off("buy-card", handleGameData);
+      Socket.off("game-buyCard", handleGameData);
+    };
   }, [Socket]);
 
   if (!gameData) return null;
