@@ -57,6 +57,9 @@ export default function Main({ Socket }: MainProps) {
     Socket.on("gameData", (data: GameData) => {
       setInitialGameData(data);
     });
+    Socket.on("newPlayer", (data: GameData) => {
+      setInitialGameData(data);
+    });
     Socket.on("error", (errors: any[]) => {
       showErrors(errors);
     });

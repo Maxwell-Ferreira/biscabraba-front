@@ -24,6 +24,11 @@ function Room({ Socket, initialGameData }: RoomProps) {
       }, 2300);
     });
 
+    Socket.on("newPlayer", (data: GameData) => {
+      playAudio(hellos[getRandomInt(1, 4) as keyof typeof hellos]);
+      setGameData(data);
+    });
+
     Socket.on("room-playerDisconnected", (data: GameData) => {
       playAudio(ohNo);
       setGameData(data);
